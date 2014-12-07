@@ -1,5 +1,6 @@
 function Snowflake(x, y) {
-  this.x = Math.random() * canvas.width * 0.8 + canvas.width * 0.10;
+  //this.x = Math.random() * canvas.width * 0.8 + canvas.width * 0.10;
+  this.x = Math.random() * canvas.width;
   this.y = 0;
   this.radius = 5;
   this.frameCount = Math.random() * 100;
@@ -17,8 +18,11 @@ function Snowflake(x, y) {
     
     this.frameCount += 0.01;
 
-    if(this.y > canvas.height - state.snowLevel) {
+    if(this.y > getSnowHeight()) {
       state.snowLevel += state.flakePayload;
+      if(state.researchIndex > 2) { // heavy snow
+        state.snowLevel += state.flakePayload;
+      }
       this.flaggedForRemoval = true;
       state.lump3 = state.lump2;
       state.lump2 = state.lump1;
